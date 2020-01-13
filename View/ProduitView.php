@@ -10,6 +10,7 @@ class ProduitView extends View
      ******************************************************/
     public function displayHome()
     {
+        echo "coucou";
         $this->displayPage();
     }
     
