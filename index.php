@@ -6,6 +6,9 @@ include 'View/View.php';
 
 include 'Controller/Controller.php';
 include 'Controller/ClientController.php';
+include 'Controller/ProduitController.php';
+include 'Controller/DevisController.php';
+include 'Controller/FactureController.php';
 
 if (isset($_GET['controller'])) {
     $controllerStart = ucfirst($_GET["controller"]) . "Controller";
