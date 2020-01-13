@@ -21,6 +21,7 @@ class ProduitController extends Controller
     public function start()
     {
         $model = new ProduitModel();
-        $this->view->displayHome();
+        $listeProduit = $model->getProduits();
+        $this->view->displayHome($listeProduit);
     }
 }
