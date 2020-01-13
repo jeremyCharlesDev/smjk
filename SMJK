@@ -1,0 +1,104 @@
+#------------------------------------------------------------
+#        Script MySQL.
+#------------------------------------------------------------
+
+
+#------------------------------------------------------------
+# Table: client
+#------------------------------------------------------------
+
+CREATE TABLE client(
+        id            Int  Auto_increment  NOT NULL ,
+        raisonsociale Varchar (255) NOT NULL ,
+        adresse       Varchar (255) NOT NULL ,
+        codepostal    Int NOT NULL ,
+        ville         Varchar (255) NOT NULL ,
+        tel           Int NOT NULL ,
+        email         Varchar (255) NOT NULL ,
+        siret         Int NOT NULL ,
+        tva           Varchar (15) NOT NULL ,
+        note          Varchar (255) NOT NULL ,
+        username      Varchar (255) NOT NULL ,
+        password      Varchar (255) NOT NULL ,
+        rang          Varchar (255) NOT NULL ,
+        logo          Varchar (255) NOT NULL
+	,CONSTRAINT client_PK PRIMARY KEY (id)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: devis
+#------------------------------------------------------------
+
+CREATE TABLE devis(
+        id        Int  Auto_increment  NOT NULL ,
+        total_ht  Float NOT NULL ,
+        total_ttc Float NOT NULL ,
+        remise    Float NOT NULL ,
+        statut    Bool NOT NULL ,
+        date      Date NOT NULL ,
+        id_client Int NOT NULL
+	,CONSTRAINT devis_PK PRIMARY KEY (id)
+
+	,CONSTRAINT devis_client_FK FOREIGN KEY (id_client) REFERENCES client(id)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: facture
+#------------------------------------------------------------
+
+CREATE TABLE facture(
+        id        Int  Auto_increment  NOT NULL ,
+        total_ht  Float NOT NULL ,
+        total_ttc Float NOT NULL ,
+        remise    Float NOT NULL ,
+        statut    Bool NOT NULL ,
+        date      Date NOT NULL ,
+        id_client Int NOT NULL
+	,CONSTRAINT facture_PK PRIMARY KEY (id)
+
+	,CONSTRAINT facture_client_FK FOREIGN KEY (id_client) REFERENCES client(id)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: produit
+#------------------------------------------------------------
+
+CREATE TABLE produit(
+        id      Int  Auto_increment  NOT NULL ,
+        libelle Varchar (255) NOT NULL ,
+        prix_ht Float NOT NULL ,
+        caract  Varchar (255) NOT NULL
+	,CONSTRAINT produit_PK PRIMARY KEY (id)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Avoir
+#------------------------------------------------------------
+
+CREATE TABLE Avoir(
+        id         Int NOT NULL ,
+        id_produit Int NOT NULL
+	,CONSTRAINT Avoir_PK PRIMARY KEY (id,id_produit)
+
+	,CONSTRAINT Avoir_devis_FK FOREIGN KEY (id) REFERENCES devis(id)
+	,CONSTRAINT Avoir_produit0_FK FOREIGN KEY (id_produit) REFERENCES produit(id)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Avoir2
+#------------------------------------------------------------
+
+CREATE TABLE Avoir2(
+        id         Int NOT NULL ,
+        id_facture Int NOT NULL
+	,CONSTRAINT Avoir2_PK PRIMARY KEY (id,id_facture)
+
+	,CONSTRAINT Avoir2_produit_FK FOREIGN KEY (id) REFERENCES produit(id)
+	,CONSTRAINT Avoir2_facture0_FK FOREIGN KEY (id_facture) REFERENCES facture(id)
+)ENGINE=InnoDB;
+
