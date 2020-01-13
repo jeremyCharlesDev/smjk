@@ -25,3 +25,4 @@ if (isset($_GET['action'])) {
 }
 
 $controller->$action();
+echo "test";
