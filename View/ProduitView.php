@@ -1,5 +1,5 @@
 <?php
-class ClientView extends View
+class ProduitView extends View
 {
     
     //######################################################

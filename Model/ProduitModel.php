@@ -1,6 +1,6 @@
 <?php
 
-class ClientModel extends Model
+class ProduitModel extends Model
 {
     
 }
